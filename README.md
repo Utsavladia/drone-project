@@ -144,18 +144,6 @@ drone-project/
 - Charging
 - Maintenance
 
-## 🧪 Testing
-
-```bash
-# Run backend tests
-cd backend
-npm test
-
-# Run frontend tests
-cd frontend
-npm test
-```
-
 ## 📝 API Documentation
 
 ### Mission Endpoints
@@ -193,24 +181,6 @@ npm test
 3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 👥 Authors
-
-- Your Name - Initial work
-
-## 🙏 Acknowledgments
-
-- List any acknowledgments here
-- Credit any libraries or tools used
-- Mention any inspirations
-
-## 📞 Support
-
-For support, email [your-email] or create an issue in the repository.
 
 ## 🔄 Updates
 
