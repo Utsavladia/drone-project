@@ -1,6 +1,7 @@
 // Map to track active mission simulations
 const activeSimulations = new Map();
 const { MissionRun } = require('../models/MissionRun');
+const Drone = require('../models/Drone');
 
 /**
  * Calculate distance between two points using Haversine formula
@@ -48,7 +49,7 @@ async function updateMissionRunStatus(missionRunId, status) {
  * @param {Array<{lat: number, lng: number}>} waypoints - Array of waypoints to simulate
  * @returns {Object} The simulation state object
  */
-function startSimulation(missionRunId, waypoints) {
+function startSimulation(missionRunId, waypoints, droneId) {
     // Handle edge cases
     if (!waypoints || waypoints.length === 0) {
         throw new Error('No waypoints provided for simulation');
@@ -82,7 +83,8 @@ function startSimulation(missionRunId, waypoints) {
         batteryDrainRate: 0.02,
         estimatedTimeRemaining: 0,
         totalPathDistance,
-        distanceTraveled: 0
+        distanceTraveled: 0,
+        droneId: droneId
     };
 
     // Add to active simulations
@@ -106,6 +108,9 @@ function startSimulation(missionRunId, waypoints) {
             state.currentPosition = { ...waypoints[waypoints.length - 1] };
             clearInterval(state.intervalId);
             updateMissionRunStatus(missionRunId, 'completed');
+            // update drone status to available
+            // conditionaly update drone status to availabe and charging based on batterylevel
+
             return;
         }
 

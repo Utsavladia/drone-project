@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import { MissionRun } from '../models/MissionRun';
 import Mission from '../models/Mission';
 import { startSimulation, activeSimulations } from '../services/missionSimulationManager';
+import Drone from '../models/Drone';
 
 export class MissionRunController {
   startMissionRun = async (req: Request, res: Response): Promise<void> => {
@@ -59,6 +60,8 @@ export class MissionRunController {
           lng: point.lng
         }));
         startSimulation(missionRun._id.toString(), waypoints);
+        // update drone status to in-mission
+        await Drone.findByIdAndUpdate(droneId, { status: 'in-mission' });
         console.log('Backend: Mission simulation started for run:', missionRun._id);
       } catch (simError) {
         console.error('Backend: Error starting mission simulation:', simError);
